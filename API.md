@@ -20,7 +20,7 @@ as general events are a process-wide facility and will result in duplicated log 
 
 ## Options
 - `[includes]` - optional configuration object
-    - `[request]` - array of extra hapi request object fields to supply to reporters on "request", "response", and "error" events. Valid values ['headers', 'payload']. Defaults to `[]`.
+    - `[request]` - array of extra hapi request object fields to supply to reporters on "request", "response", and "error" events. Valid values ['headers', 'payload', 'app']. Defaults to `[]`.
     - `[response]` - array of extra hapi response object fields to supply to reporters on "response" events. Valid values ['payload']. Defaults to `[]`.
 - `[ops]` - options for controlling the ops reporting from good. Set to `false` to disable ops monitoring completely.
     - `config` - options passed directly into the [`Oppsy`](https://github.com/hapijs/oppsy) constructor as the `config` value. Defaults to `{}`
@@ -170,6 +170,7 @@ Event object associated with 'error' events.
 - `error` - the raw error object.
 - `config` - plugin-specific config object combining `request.route.settings.plugins.good` and `request.plugins.good`. Request-level overrides route-level. Reporters could use `config` for additional filtering logic.
 - `headers` - the request headers if `includes.request` includes "headers"
+- `app` - the request.app-object if `includes.request` includes "app"
 
 The `toJSON` method of `GreatError` has been overwritten because `Error` objects can not be stringified directly. A stringified `GreatError` will have `error.message` and `error.stack` in place of the raw `Error` object.
 
@@ -199,6 +200,7 @@ Event object associated with the `responseEvent` event option into Good.
 - `tags` - array of strings representing any tags from route config. Maps to `request.route.settings.tags`.
 - `config` - plugin-specific config object combining `request.route.settings.plugins.good` and `request.plugins.good`. Request-level overrides route-level. Reporters could use `config` for additional filtering logic.
 - `headers` - the request headers if `includes.request` includes "headers"
+- `app` - the request.app-object if `includes.request` includes "app"
 - `requestPayload` - the request payload if `includes.request` includes "payload"
 - `responsePayload` - the response payload if `includes.response` includes "payload"
 
